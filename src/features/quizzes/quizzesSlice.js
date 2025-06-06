@@ -1,8 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { useSelector } from "react-redux";
 
 //create slice
-const quizzesSlice = {
+export const quizzesSlice = createSlice({
   //name it
   name: "quizzes",
   //create the intial state as per the problem
@@ -13,11 +12,15 @@ const quizzesSlice = {
   reducers: {
     //add Quiz function?
     addQuiz: (state, action) => {
-      return action.payload;
+      const { id } = action.payload;
+      state.quizzes[id] = action.payload;
     }
   }
-};
+});
 
 export const selectQuiz = (state) => {
-  return state.topics.topics;
+  return state.quizzes.quizzes;
 };
+
+export const { addQuiz } = quizzesSlice.actions;
+export default quizzesSlice.reducer;
